@@ -36,21 +36,24 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: $output_file_path
-        asset_name: files-list.txt
-        asset_content_type: text/plain
-
     - name: Output Log
       run: |
+        echo "Searching for *files-list.txt* files..."
+        find / -name "*files-list.txt*"
         ref_name="${{ github.ref_name }}"
         if [ -z "${{ github.event.inputs.version }}" ]; then
           echo "Building latest version for $ref_name"
         else
           echo "Building version ${{ github.event.inputs.version }} for $ref_name"
         fi
+
+
+    # - name: Upload Release Asset
+    #   uses: actions/upload-release-asset@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #     asset_path: ${{ env.output_file_path }}
+    #     asset_name: files-list.txt
+    #     asset_content_type: text/plain
