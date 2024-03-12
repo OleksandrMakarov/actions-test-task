@@ -18,10 +18,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
     - name: Create list of files in directory
       uses: ./.github/actions
       with:
         path: ./root_dir
+
     - name: Output file path
       run: echo "File path is $output_file_path"
   
@@ -31,24 +33,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref_name }}
-        release_name: Release ${{ github.ref_name }}
+        tag_name: ${{ github.event.inputs.version || github.ref_name }}
+        release_name: Release ${{ github.event.inputs.version || github.ref_name }}
         draft: false
         prerelease: false
-
-    - name: Output Log
-      run: |
-        echo "Searching for *files-list.txt* files..."
-        cat /home/runner/work/actions-test-task/actions-test-task/files-list.txt
-        echo "File path is $output_file_path"
-        
-
-        ref_name="${{ github.ref_name }}"
-        if [ -z "${{ github.event.inputs.version }}" ]; then
-          echo "Building latest version for $ref_name"
-        else
-          echo "Building version ${{ github.event.inputs.version }} for $ref_name"
-        fi
 
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
