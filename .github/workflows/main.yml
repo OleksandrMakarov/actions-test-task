@@ -2,10 +2,10 @@ name: Main Workflow
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: 'Branch or tag to build'
-        required: true
-        default: 'main'
+      # branch:
+        # description: 'Branch or tag to build'
+        # required: true
+        # default: 'main'
       version:
         description: 'Build version'
         required: false
