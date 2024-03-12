@@ -1,14 +1,14 @@
-name: 'List of Files'
-description: 'List of files in a provided directory'
+name: "List of Files"
+description: "List of files in a provided directory"
 inputs:
   path:
-    description: 'Path to directory:'
+    description: "Path to directory:"
     required: true
 outputs:
   output-file-path:
-    description: 'Path to otput file'
+    description: "Path to otput file"
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - run: |
         find ${{ inputs.path }} -type f > files-list.txt
