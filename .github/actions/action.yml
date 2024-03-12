@@ -4,13 +4,10 @@ inputs:
   path:
     description: "Path to directory:"
     required: true
-outputs:
-  output-file-path:
-    description: "Path to otput file"
 runs:
   using: "composite"
   steps:
     - run: |
         find ${{ inputs.path }} -type f > files-list.txt
-        echo "::set-output name=output-file-path::$(pwd)/files-list.txt"
+        echo "output_file_path=$(pwd)/files-list.txt" >> $GITHUB_ENV
       shell: bash

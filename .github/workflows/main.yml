@@ -15,15 +15,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      
     - name: Create list of files in directory
-      id: list_of_files
       uses: ./.github/actions
       with:
         path: ./root_dir
+
     - name: Output file path
-      run: echo "File path is ${{ steps.list_of_files.outputs.output-file-path }}"
+      run: echo "File path is $output_file_path"
+
     - name: Output Log
-      shell: bash
       run: |
         ref_name="${{ github.ref_name }}"
         if [ -z "${{ github.event.inputs.version }}" ]; then
