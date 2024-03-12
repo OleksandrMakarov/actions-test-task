@@ -23,7 +23,8 @@ jobs:
       shell: bash
       run: |
         ref_name="${{ github.ref_name }}"
-        echo "$ref_name"
+        echo "ref_name: $ref_name"
+        echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
         if [ -z "${{ github.event.inputs.version }}" ]; then
           echo "Building latest version for $ref_name"
         else
