@@ -23,7 +23,7 @@ jobs:
       shell: bash
       run: |
         ref="${{ github.ref }}"
-        ref=${ref#refs/*/}
+        # ref=${ref#refs/*/}
         if [ -z "${{ github.event.inputs.version }}" ]; then
           echo "Building latest version for $ref"
         else
