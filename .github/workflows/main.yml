@@ -2,10 +2,6 @@ name: Main Workflow
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: 'Branch or tag to build'
-        required: true
-        default: 'main'
       version:
         description: 'Build version'
         required: false
@@ -19,8 +15,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.inputs.branch }}
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
