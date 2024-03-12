@@ -2,10 +2,10 @@ name: Main Workflow
 on:
   workflow_dispatch:
     inputs:
-      # branch:
-        # description: 'Branch or tag to build'
-        # required: true
-        # default: 'main'
+      branch:
+        description: 'Branch or tag to build'
+        required: true
+        default: 'main'
       version:
         description: 'Build version'
         required: false
@@ -26,9 +26,12 @@ jobs:
       with:
         python-version: "3.10"
     - name: Build
+      shell: bash
       run: |
+        ref="${{ github.ref }}"
+        ref=${ref#refs/*/}
         if [ -z "${{ github.event.inputs.version }}" ]; then
-          echo "Building latest version for ${{ github.event.inputs.branch }}"
+          echo "Building latest version for $ref"
         else
-          echo "Building version ${{ github.event.inputs.version }} for ${{ github.event.inputs.branch }}"
+          echo "Building version ${{ github.event.inputs.version }} for $ref"
         fi
