@@ -10,7 +10,7 @@ on:
       - '*'
 
 permissions:
-  contents: write
+  contents: read-write
 
 jobs:
   build:
@@ -39,7 +39,7 @@ jobs:
     - name: Output Log
       run: |
         echo "Searching for *files-list.txt* files..."
-        find / -name "*files-list.txt*"
+        cat /home/runner/work/actions-test-task/actions-test-task/files-list.txt
         ref_name="${{ github.ref_name }}"
         if [ -z "${{ github.event.inputs.version }}" ]; then
           echo "Building latest version for $ref_name"
